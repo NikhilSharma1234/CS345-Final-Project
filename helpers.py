@@ -47,21 +47,20 @@ def clean_data(df, flag):
     return new_df
 
 def split_data(df, label):
-    # Get out list of features minus the label column
-    features = list(df)[:-1]
+    # Get number of rows in dataframe
+    num_entries = df.shape[0]
 
-    # Randomly sample 80%
-    df_80 = df.sample(frac = 0.8)
+    # Split the data into 80%
+    eighty_percent = int(0.8*num_entries)
+    df_train = df.head(eighty_percent)
 
-    # Get the rest of the 20% of the dataframe
-    df_20 = df.drop(df_80.index)
+    # Get the rest of the 20%
+    df_test = df.head(-1*(num_entries-eighty_percent))
 
-    # form training returnable variables
-    X_train = df_80[features]
-    y_train = df_80[label]
-
-    # form testing returnable variables
-    X_test = df_20[features]
-    y_test = df_80[label]
+    # Form training and testing variables (don't include Label column)
+    X_train = df_train[df.keys()[:-1]]
+    X_test = df_test[df.keys()[:-1]]
+    y_train = df_train[label]
+    y_test = df_test[label]
 
     return X_train, y_train, X_test, y_test
