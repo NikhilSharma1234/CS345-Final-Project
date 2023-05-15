@@ -63,4 +63,5 @@ def split_data(df, label):
     y_train = df_train[label]
     y_test = df_test[label]
 
+    # Return the data
     return X_train, y_train, X_test, y_test
