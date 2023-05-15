@@ -38,6 +38,6 @@ def benign_regression_evaluate(model, X_test, y_test, threshold):
     predictions = model.predict(X_test)
     for i in range(len(predictions)):
         total += 1
-        if predictions[i] == y_test.iloc[i] and predictions[i] < threshold:
+        if predictions[i] == y_test.iloc[i] and predictions[i] <= threshold:
             correct += 1
     return(correct/total)
