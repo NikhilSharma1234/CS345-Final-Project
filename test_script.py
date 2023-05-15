@@ -3,16 +3,12 @@ import multiclass_classification as mcc
 import feature_selection as fs
 import unsupervised_learning as ul
 import regression as reg
-import pandas as pd
 
 #Loading Data
 df = help.load_data("File1.csv")
 df_clean = help.clean_data(df, "remove")
-print(df_clean)
 X_train, y_train, X_test, y_test = help.split_data(df_clean, "Label")
-print(X_train)
-print(X_test)
-quit()
+
 #Multi-Class Classification
 model = mcc.direct_multiclass_train("dt", X_train, y_train)
 acc = mcc.direct_multiclass_test(model, X_test, y_test)
